@@ -104,8 +104,8 @@ num_textblock = len(textblock_list)
 available_voices = {os.path.split(path)[1] for path in glob.glob(join(VOICE_CACHES_DIR, "*"))}
 
 # ボイスを準備する。
-check_voices_thread = threading.Thread(target=prepare_voices)
-check_voices_thread.start()
+prepare_voices_thread = threading.Thread(target=prepare_voices)
+prepare_voices_thread.start()
 
 if not PREPARE_ONLY:
     print("再生を開始する")
@@ -129,5 +129,5 @@ if not PREPARE_ONLY:
     play_sound_file(join(SOUNDS_DIR, "ed.wav"))
     print("全ての再生完了")
 
-check_voices_thread.join()
+prepare_voices_thread.join()
 exit(0)
