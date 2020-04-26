@@ -1,0 +1,7 @@
+#準備が必要
+datas/api_key.txt
+text.txt
+
+voice_caches/*
+
+.idea
