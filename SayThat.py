@@ -23,6 +23,7 @@ VOICE_WAITING_TIMEOUT = 30
 VOICE_WANTING_COUNT = int(VOICE_WAITING_TIMEOUT / VOICE_WAITING_DELTATIME)
 
 PREPARE_ONLY = "-p" in sys.argv
+PLAY_ALL_VOICE = "-a" in sys.argv
 
 
 def read_text_from(path: str) -> str:
@@ -106,6 +107,9 @@ available_voices = {os.path.split(path)[1] for path in glob.glob(join(VOICE_CACH
 # ボイスを準備する。
 prepare_voices_thread = threading.Thread(target=prepare_voices)
 prepare_voices_thread.start()
+if PLAY_ALL_VOICE:
+    print("-aコマンド : 全てのボイスを準備してから再生を開始する")
+    prepare_voices_thread.join()
 
 if not PREPARE_ONLY:
     print("再生を開始する")
