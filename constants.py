@@ -1,7 +1,7 @@
 import os
 from os.path import join
 
-VERSION = "1.3"
+VERSION = "1.4"
 
 VOICE_WAITING_DELTATIME = 1
 VOICE_WAITING_TIMEOUT = 30

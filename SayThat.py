@@ -7,6 +7,7 @@ import time
 from argparse import ArgumentParser
 import gateway
 import constants
+import re
 
 print("SayThat {} (C)Mya-Mya(2020)".format(constants.VERSION))
 
@@ -42,7 +43,7 @@ def prepare_voices():
 raw_text = gateway.read_text_from(args.text_file_path)
 if len(raw_text) == 0:
     exit(0)
-textblock_list = raw_text.replace("\n", "").split("*")
+textblock_list = [textblock for textblock in re.split("。|、", raw_text.replace("\n", "")) if not textblock == ""]
 num_textblock = len(textblock_list)
 
 # ボイスがボイスキャッシュの中にあり準備完了なテキストの集合
@@ -54,8 +55,7 @@ prepare_voices_thread.start()
 
 # 読むテキストを表示する。
 print("-----")
-for textblock in textblock_list:
-    print(textblock)
+print(raw_text)
 print("-----")
 
 if args.play_all_voice:
@@ -67,8 +67,6 @@ if not args.prepare_only:
     gateway.play_sound_file(join(constants.SOUNDS_DIR, "op.wav"))
     for textblock_idx, textblock in enumerate(textblock_list):
         textblock_info = "({}/{})".format(textblock_idx + 1, num_textblock)
-        if textblock_idx != 0:
-            gateway.play_sound_file(join(constants.SOUNDS_DIR, "se.wav"))
 
         # ボイスの準備を待つループ
         for waiting_cnt in range(constants.VOICE_WANTING_COUNT):

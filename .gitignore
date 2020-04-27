@@ -6,3 +6,4 @@ voice_caches/*
 
 .idea
 __pycache__/*
+trash_voice_caches/*
