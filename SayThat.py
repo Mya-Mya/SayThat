@@ -128,7 +128,7 @@ if not args.prepare_only:
     print("再生を開始する")
     play_sound_file(join(SOUNDS_DIR, "op.wav"))
     for textblock_idx, textblock in enumerate(textblock_list):
-        textblock_info = "{}".format(textblock_idx + 1, num_textblock)
+        textblock_info = "({}/{})".format(textblock_idx + 1, num_textblock)
         if textblock_idx != 0:
             play_sound_file(join(SOUNDS_DIR, "se.wav"))
 
