@@ -16,7 +16,6 @@ VOICE_CACHES_DIR = join(CWD, "voice_caches", "")
 DATAS_DIR = join(CWD, "datas", "")
 
 API_KEY_FILE_PATH = join(DATAS_DIR, "api_key.txt")
-TEXT_FILE_PATH = join(CWD, "text.txt")
 
 VOICE_WAITING_DELTATIME = 1
 VOICE_WAITING_TIMEOUT = 30
@@ -25,6 +24,7 @@ VOICE_WANTING_COUNT = int(VOICE_WAITING_TIMEOUT / VOICE_WAITING_DELTATIME)
 argparser=ArgumentParser()
 argparser.add_argument("-p",action="store_true",dest="prepare_only")
 argparser.add_argument("-a",action="store_true",dest="play_all_voice")
+argparser.add_argument("-t",default=join(CWD,"text.txt"),dest="text_file_path")
 args=argparser.parse_args()
 
 def read_text_from(path: str) -> str:
@@ -96,7 +96,7 @@ def prepare_voices():
 API_KEY = read_text_from(API_KEY_FILE_PATH)
 
 # テキストを読み込む
-raw_text = read_text_from(TEXT_FILE_PATH)
+raw_text = read_text_from(args.text_file_path)
 if len(raw_text) == 0:
     exit(0)
 textblock_list = raw_text.replace("\n", "").split("*")
