@@ -5,3 +5,4 @@ text.txt
 voice_caches/*
 
 .idea
+__pycache__/*
