@@ -9,6 +9,7 @@ import time
 from argparse import ArgumentParser
 
 VERSION="1.1"
+print("SayThat {} (C)Mya-Mya(2020)".format(VERSION))
 
 CWD = os.getcwd()
 SOUNDS_DIR = join(CWD, "sounds", "")
