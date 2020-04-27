@@ -6,9 +6,10 @@ import os
 from os.path import join
 import threading
 import time
-import sys
+from argparse import ArgumentParser
 
-VERSION="1.0"
+VERSION="1.1"
+print("SayThat {} (C)Mya-Mya(2020)".format(VERSION))
 
 CWD = os.getcwd()
 SOUNDS_DIR = join(CWD, "sounds", "")
@@ -16,15 +17,16 @@ VOICE_CACHES_DIR = join(CWD, "voice_caches", "")
 DATAS_DIR = join(CWD, "datas", "")
 
 API_KEY_FILE_PATH = join(DATAS_DIR, "api_key.txt")
-TEXT_FILE_PATH = join(CWD, "text.txt")
 
 VOICE_WAITING_DELTATIME = 1
 VOICE_WAITING_TIMEOUT = 30
 VOICE_WANTING_COUNT = int(VOICE_WAITING_TIMEOUT / VOICE_WAITING_DELTATIME)
 
-PREPARE_ONLY = "-p" in sys.argv
-PLAY_ALL_VOICE = "-a" in sys.argv
-
+argparser=ArgumentParser()
+argparser.add_argument("-p",action="store_true",dest="prepare_only")
+argparser.add_argument("-a",action="store_true",dest="play_all_voice")
+argparser.add_argument("-t",default=join(CWD,"text.txt"),dest="text_file_path")
+args=argparser.parse_args()
 
 def read_text_from(path: str) -> str:
     '''テキストファイルの内容を取得する。'''
@@ -95,7 +97,7 @@ def prepare_voices():
 API_KEY = read_text_from(API_KEY_FILE_PATH)
 
 # テキストを読み込む
-raw_text = read_text_from(TEXT_FILE_PATH)
+raw_text = read_text_from(args.text_file_path)
 if len(raw_text) == 0:
     exit(0)
 textblock_list = raw_text.replace("\n", "").split("*")
@@ -107,11 +109,11 @@ available_voices = {os.path.split(path)[1] for path in glob.glob(join(VOICE_CACH
 # ボイスを準備する。
 prepare_voices_thread = threading.Thread(target=prepare_voices)
 prepare_voices_thread.start()
-if PLAY_ALL_VOICE:
+if args.play_all_voice:
     print("-aコマンド : 全てのボイスを準備してから再生を開始する")
     prepare_voices_thread.join()
 
-if not PREPARE_ONLY:
+if not args.prepare_only:
     print("再生を開始する")
     play_sound_file(join(SOUNDS_DIR, "op.wav"))
     for textblock_idx, textblock in enumerate(textblock_list):
