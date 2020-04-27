@@ -8,13 +8,17 @@ import threading
 import time
 from argparse import ArgumentParser
 
-VERSION="1.2"
+VERSION="1.3"
 print("SayThat {} (C)Mya-Mya(2020)".format(VERSION))
 
 CWD = os.path.dirname(__file__)
 SOUNDS_DIR = join(CWD, "sounds", "")
 VOICE_CACHES_DIR = join(CWD, "voice_caches", "")
+if not os.path.exists(VOICE_CACHES_DIR):
+    os.mkdir(VOICE_CACHES_DIR)
 DATAS_DIR = join(CWD, "datas", "")
+if not os.path.exists(DATAS_DIR):
+    os.mkdir(DATAS_DIR)
 
 API_KEY_FILE_PATH = join(DATAS_DIR, "api_key.txt")
 
