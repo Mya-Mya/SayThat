@@ -37,11 +37,11 @@ def read_text_from(path: str) -> str:
 
 def get_voice_from_docomotts(textblock: str) -> bytes:
     '''ドコモ開発者サービスからボイスを取得する。'''
-    URL = "https://api.apigw.smt.docomo.ne.jp/crayon/v1/textToSpeech?APIKEY={}".format(API_KEY)
+    URL = "https://api.apigw.smt.docomo.ne.jp/futureVoiceCrayon/v1/textToSpeech?APIKEY={}".format(API_KEY)
     data = {
         "Command": "AP_Synth",
-        "SpeakerID": "1",
-        "StyleID": "1",
+        "SpeakerID": "6",
+        "StyleID": "6",
         "SpeechRate": "0.8",
         "AudioFileFormat": "2",
         "TextData": textblock
