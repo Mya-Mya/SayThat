@@ -1,4 +1,3 @@
-
 import winsound
 import requests
 import glob
@@ -8,7 +7,7 @@ import threading
 import time
 from argparse import ArgumentParser
 
-VERSION="1.2"
+VERSION = "1.3"
 print("SayThat {} (C)Mya-Mya(2020)".format(VERSION))
 
 CWD = os.path.dirname(__file__)
@@ -22,11 +21,12 @@ VOICE_WAITING_DELTATIME = 1
 VOICE_WAITING_TIMEOUT = 30
 VOICE_WANTING_COUNT = int(VOICE_WAITING_TIMEOUT / VOICE_WAITING_DELTATIME)
 
-argparser=ArgumentParser()
-argparser.add_argument("-p",action="store_true",dest="prepare_only")
-argparser.add_argument("-a",action="store_true",dest="play_all_voice")
-argparser.add_argument("-t",default=join(CWD,"text.txt"),dest="text_file_path")
-args=argparser.parse_args()
+argparser = ArgumentParser()
+argparser.add_argument("-p", action="store_true", dest="prepare_only")
+argparser.add_argument("-a", action="store_true", dest="play_all_voice")
+argparser.add_argument("-t", default=join(CWD, "text.txt"), dest="text_file_path")
+args = argparser.parse_args()
+
 
 def read_text_from(path: str) -> str:
     '''テキストファイルの内容を取得する。'''
@@ -37,11 +37,11 @@ def read_text_from(path: str) -> str:
 
 def get_voice_from_docomotts(textblock: str) -> bytes:
     '''ドコモ開発者サービスからボイスを取得する。'''
-    URL = "https://api.apigw.smt.docomo.ne.jp/crayon/v1/textToSpeech?APIKEY={}".format(API_KEY)
+    URL = "https://api.apigw.smt.docomo.ne.jp/futureVoiceCrayon/v1/textToSpeech?APIKEY={}".format(API_KEY)
     data = {
         "Command": "AP_Synth",
-        "SpeakerID": "1",
-        "StyleID": "1",
+        "SpeakerID": "6",
+        "StyleID": "6",
         "SpeechRate": "0.8",
         "AudioFileFormat": "2",
         "TextData": textblock

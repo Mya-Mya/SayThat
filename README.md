@@ -4,7 +4,7 @@
 ## システム要件
 * OS : Windows
 * Python : 3.7 以上
-* ライブラリ : なし
+* ライブラリ : requests
 * ネットワーク環境
 * API : 音声合成API(ドコモ開発者サービス音声合成API【Powered by NTTテクノクロス】)
 
