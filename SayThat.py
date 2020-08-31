@@ -1,4 +1,3 @@
-
 import winsound
 import requests
 import glob
@@ -8,7 +7,7 @@ import threading
 import time
 from argparse import ArgumentParser
 
-VERSION="1.2"
+VERSION = "1.2"
 print("SayThat {} (C)Mya-Mya(2020)".format(VERSION))
 
 CWD = os.path.dirname(__file__)
@@ -22,11 +21,12 @@ VOICE_WAITING_DELTATIME = 1
 VOICE_WAITING_TIMEOUT = 30
 VOICE_WANTING_COUNT = int(VOICE_WAITING_TIMEOUT / VOICE_WAITING_DELTATIME)
 
-argparser=ArgumentParser()
-argparser.add_argument("-p",action="store_true",dest="prepare_only")
-argparser.add_argument("-a",action="store_true",dest="play_all_voice")
-argparser.add_argument("-t",default=join(CWD,"text.txt"),dest="text_file_path")
-args=argparser.parse_args()
+argparser = ArgumentParser()
+argparser.add_argument("-p", action="store_true", dest="prepare_only")
+argparser.add_argument("-a", action="store_true", dest="play_all_voice")
+argparser.add_argument("-t", default=join(CWD, "text.txt"), dest="text_file_path")
+args = argparser.parse_args()
+
 
 def read_text_from(path: str) -> str:
     '''テキストファイルの内容を取得する。'''
