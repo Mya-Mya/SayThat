@@ -7,7 +7,7 @@ import threading
 import time
 from argparse import ArgumentParser
 
-VERSION = "1.2"
+VERSION = "1.3"
 print("SayThat {} (C)Mya-Mya(2020)".format(VERSION))
 
 CWD = os.path.dirname(__file__)
